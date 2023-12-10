@@ -1,0 +1,11 @@
+---
+- hosts: other_nodes
+  roles:
+    - roles/andrewrothstein.minio
+- name: Install Spark on Ubuntu
+  hosts: main_web_nodes
+  become: yes
+  vars:
+    spark_version: 3.5.0
+  roles:
+    - roles/spark

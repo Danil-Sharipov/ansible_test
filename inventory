@@ -1,0 +1,14 @@
+web1 ansible_host=localhost ansible_port=2222 ansible_connection=ssh ansible_user=root ansible_ssh_pass=root123
+web2 ansible_host=localhost ansible_port=2223 ansible_connection=ssh ansible_user=root ansible_ssh_pass=root123
+web3 ansible_host=localhost ansible_port=2224 ansible_connection=ssh ansible_user=root ansible_ssh_pass=root123
+
+[main_web_nodes]
+web1
+web2
+
+[other_nodes]
+web3
+
+[all_nodes:children]
+main_web_nodes
+other_nodes

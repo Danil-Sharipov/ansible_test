@@ -1,0 +1,32 @@
+---
+- name: Update package index
+  apt:
+    update_cache: yes
+
+- name: Install default JDK
+  apt:
+    name: default-jdk
+    state: present
+
+# - name: Download Spark tarball
+#   get_url:
+#     url: https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz
+#     dest: /tmp/spark.tgz
+#     force: yes
+
+- name: Extract Spark tarball
+  unarchive:
+    src: https://dlcdn.apache.org/spark/spark-{{ spark_version }}/spark-{{ spark_version }}-bin-hadoop3.tgz
+    dest: /opt/
+    remote_src: yes
+
+# - name: Set SPARK_HOME environment variable
+#   shell: 
+#       cmd: sh -c "export SPARK_HOME=/opt/spark"
+#   become: true
+
+# - name: Add SPARK_HOME/bin to the PATH
+#   shell: 
+#       cmd: sh -c "export PATH="$PATH:$SPARK_HOME/bin""
+#   become: true
+# Это не работает на докер контейнерах
