@@ -4,11 +4,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                git 'https://github.com/Danil-Sharipov/zookeeper_with_kafka.git'
+                git 'https://github.com/Danil-Sharipov/ansible_test.git'
                 sh'''
                     docker compose down
                     docker compose up -d --build
-                    ansible-inventory -i inventory --list
+                    ansible-galaxy install -p ./roles andrewrothstein.minio
+                    ansible-playbook -i inventory playbook.yml
 
                 '''
             }
